@@ -56,6 +56,12 @@ Limits search results to the contents of the specified collection. You can searc
   # The following example uses the OR character:
   RailsGSA.search(:gsa_url => "http://testgsa.com", :search_term => "hello", :site => "col1|col2")
 
+=== Apply a Front-End
+Front-ends allow for filtering, biasing and altering the look and feel of the results returned from a collection.
+
+  # Default Value: "default_frontend"
+  RailsGSA.search(:gsa_url => "http://testgsa.com", :search_term => "hello", :site => "myCollection", :client=> "myFrontEnd")
+
 === Pagination
 
 You can use the pagination parameters to get results as you desire
