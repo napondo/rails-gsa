@@ -56,9 +56,8 @@ module RailsGSA
                          "proxystylesheet=#{@default_options[:proxystylesheet]}&"+
                          "site=#{@default_options[:site]}&"+
                          "start=#{@default_options[:start]}&"+
-                         "num=#{@default_options[:num]}&"+
-                         "requiredfields=#{@default_options[:requiredfields]}")
-    return url
+                         "num=#{@default_options[:num]}&")
+    return url + "requiredfields=#{@default_options[:requiredfields]}"
   end
 
   def self.xml_search_url
