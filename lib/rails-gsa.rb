@@ -38,6 +38,7 @@ module RailsGSA
   def self.perform_search
     @http = HTTP::Requestor.new(@default_options[:gsa_url])
     if @default_options[:output] == "json"
+      puts "The json search url #{json_search_url}"
       json_response = @http.post(json_search_url).body
       response_object = JSON.parse(json_response)
       return ((response_object.empty? || response_object.nil?) ? {} : response_object)
