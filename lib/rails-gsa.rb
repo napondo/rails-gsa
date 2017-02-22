@@ -23,7 +23,6 @@ module RailsGSA
   end
 
   def self.default_suggest_options
-    puts "******* Building default suggest options"
     @default_suggest_options ||= {:gsa_url => "",
                                   :search_term => "",
                                   :max => 10,
@@ -47,11 +46,8 @@ module RailsGSA
   end
 
   def self.suggest(args = {})
-    puts "***** Intiating the creation suggestions"
     default_suggest_options
-    puts "*** About to merge #{args} and #{@default_suggest_options}"
     @default_suggest_options.merge!(args)
-    puts "*** Checking for empty gsa_url #{@default_suggest_options[:gsa_url]}"
     raise ArgumentError, "GSA URL missing. Please provide valid arguments." if @default_suggest_options[:gsa_url].empty? || @default_suggest_options[:gsa_url].nil?
 
     return get_suggestions
@@ -193,7 +189,6 @@ module RailsGSA
     @http_sug = HTTP::Requestor.new(@default_suggest_options[:gsa_url])
     if @default_suggest_options[:format] == "rich"
       rich_object = @http_sug.post(suggest_rich_url).body
-      puts "****GEM*********About to return rich object"
       return ((rich_object.empty? || rich_object.nil?) ? {} : rich_object)
     elsif @default_suggest_options[:format] == "os"
       os_object = @http_sug.post(suggest_os_url).body
@@ -202,7 +197,6 @@ module RailsGSA
   end
 
   def self.suggest_rich_url
-    puts "****GEM*********Building RICH URL for suggestions"
     url = URI.escape("/suggest"+
                       "?q=#{@default_suggest_options[:search_term]}"+
                       "&max=#{@default_suggest_options[:max]}"+
