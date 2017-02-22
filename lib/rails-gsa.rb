@@ -190,7 +190,7 @@ module RailsGSA
   end
 
   def self.get_suggestions
-    @http_sug = HTTP::Requestor.new(@default_suggest_options)
+    @http_sug = HTTP::Requestor.new(@default_suggest_options[:gsa_url])
     if @default_suggest_options[:format] == "rich"
       rich_object = @http_sug.post(suggest_rich_url).body
       puts "****GEM*********About to return rich object"
