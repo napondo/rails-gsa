@@ -48,7 +48,7 @@ module RailsGSA
   def self.suggest(args = {})
     default_suggest_options
     @default_suggest_options.merge!(args)
-    raise ArgumentError, "GSA URL missing. Please provide valid arguments." if @default_options[:gsa_url].empty? || @default_options[:gsa_url].nil?
+    raise ArgumentError, "GSA URL missing. Please provide valid arguments." if @default_suggest_options[:gsa_url].empty? || @default_suggest_options[:gsa_url].nil?
 
     return get_suggestions
   end
