@@ -23,6 +23,7 @@ module RailsGSA
   end
 
   def self.default_suggest_options
+    puts "******* Building default suggest options"
     @default_suggest_options ||= {:gsa_url => "",
                                   :search_term => "",
                                   :max => 10,
@@ -46,6 +47,7 @@ module RailsGSA
   end
 
   def self.suggest(args = {})
+    puts "***** Intiating the creation suggestions"
     default_suggest_options
     @default_suggest_options.merge!(args)
     raise ArgumentError, "GSA URL missing. Please provide valid arguments." if @default_suggest_options[:gsa_url].empty? || @default_suggest_options[:gsa_url].nil?
