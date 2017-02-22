@@ -49,7 +49,9 @@ module RailsGSA
   def self.suggest(args = {})
     puts "***** Intiating the creation suggestions"
     default_suggest_options
+    puts "*** About to merge #{args} and #{@default_suggest_options}"
     @default_suggest_options.merge!(args)
+    puts "*** Checking for empty gsa_url #{@default_suggest_options[:gsa_url]}"
     raise ArgumentError, "GSA URL missing. Please provide valid arguments." if @default_suggest_options[:gsa_url].empty? || @default_suggest_options[:gsa_url].nil?
 
     return get_suggestions
