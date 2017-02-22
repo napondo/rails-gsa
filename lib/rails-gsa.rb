@@ -204,21 +204,21 @@ module RailsGSA
   def self.suggest_rich_url
     puts "****GEM*********Building RICH URL for suggestions"
     url = URI.escape("/suggest"+
-                      "?q=#{default_suggest_options[:search_term]}"+
-                      "&max=#{default_suggest_options[:max]}"+
-                      "&site=#{default_suggest_options[:site]}"+
-                      "&client=#{default_suggest_options[:client]}"+
-                      "&access=#{default_suggest_options[:client]}"+
+                      "?q=#{@default_suggest_options[:search_term]}"+
+                      "&max=#{@default_suggest_options[:max]}"+
+                      "&site=#{@default_suggest_options[:site]}"+
+                      "&client=#{@default_suggest_options[:client]}"+
+                      "&access=#{@default_suggest_options[:client]}"+
                       "&format=rich")
   end
 
   def self.suggest_os_url
     url = URI.escape("/suggest"+
-                     "?q=#{default_suggest_options[:search_term]}"+
-                     "&max=#{default_suggest_options[:max]}"+
-                     "&site=#{default_suggest_options[:site]}"+
-                     "&client=#{default_suggest_options[:client]}"+
-                     "&access=#{default_suggest_options[:client]}"+
+                     "?q=#{@default_suggest_options[:search_term]}"+
+                     "&max=#{@default_suggest_options[:max]}"+
+                     "&site=#{@default_suggest_options[:site]}"+
+                     "&client=#{@default_suggest_options[:client]}"+
+                     "&access=#{@default_suggest_options[:client]}"+
                      "&format=os")
   end
 end
