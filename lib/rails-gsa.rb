@@ -188,9 +188,11 @@ module RailsGSA
   def self.get_suggestions
     @http_sug = HTTP::Requestor.new(@default_suggest_options)
     if @default_suggest_options[:format] == "rich"
-      rich_response = @http_sug.post(suggest_rich_url).body
+      rich_object = @http_sug.post(suggest_rich_url).body
+      return ((rich_object.empty? || rich_object.nil?) ? {} : rich_object)
     elsif @default_suggest_options[:format] == "os"
-      os_response = @http_sug.post(suggest_os_url).body
+      os_object = @http_sug.post(suggest_os_url).body
+      return ((os_object.empty? || os_object.nil?) ? {} : os_object)
     end
   end
 
