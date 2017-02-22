@@ -22,6 +22,17 @@ module RailsGSA
     }
   end
 
+  def self.default_suggest_options
+    @default_suggest_options ||= {:gsa_url => "",
+                                  :search_term => "",
+                                  :max => 10,
+                                  :access => "p",
+                                  :client => "default_frontend",
+                                  :site => "default_collection",
+                                  :format => "rich"
+    }
+  end
+
   def self.search(args = {})
     default_options
     @default_options.merge!(args)
@@ -32,6 +43,14 @@ module RailsGSA
     @default_options[:num] = 10 unless @default_options[:num].is_a?(Fixnum)
 
     return perform_search
+  end
+
+  def self.suggest(args = {})
+    default_suggest_options
+    @default_suggest_options.merge!(args)
+    raise ArgumentError, "GSA URL missing. Please provide valid arguments." if @default_options[:gsa_url].empty? || @default_options[:gsa_url].nil?
+
+    return get_suggestions
   end
 
   protected
@@ -164,5 +183,34 @@ module RailsGSA
       end
       return results
     end
+  end
+
+  def self.get_suggestions
+    @http_sug = HTTP::Requestor.new(@default_suggest_options)
+    if @default_suggest_options[:format] == "rich"
+      rich_response = @http_sug.post(suggest_rich_url).body
+    elsif @default_suggest_options[:format] == "os"
+      os_response = @http_sug.post(suggest_os_url).body
+    end
+  end
+
+  def self.suggest_rich_url
+    url = URI.escape("/suggest"+
+                      "?q=#{default_suggest_options[:search_term]}"+
+                      "&max=#{default_suggest_options[:max]}"+
+                      "&site=#{default_suggest_options[:site]}"+
+                      "&client=#{default_suggest_options[:client]}"+
+                      "&access=#{default_suggest_options[:client]}"+
+                      "&format=rich")
+  end
+
+  def self.suggest_os_url
+    url = URI.escape("/suggest"+
+                     "?q=#{default_suggest_options[:search_term]}"+
+                     "&max=#{default_suggest_options[:max]}"+
+                     "&site=#{default_suggest_options[:site]}"+
+                     "&client=#{default_suggest_options[:client]}"+
+                     "&access=#{default_suggest_options[:client]}"+
+                     "&format=os")
   end
 end
