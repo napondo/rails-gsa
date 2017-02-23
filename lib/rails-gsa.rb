@@ -202,7 +202,7 @@ module RailsGSA
                       "&max=#{@default_suggest_options[:max]}"+
                       "&site=#{@default_suggest_options[:site]}"+
                       "&client=#{@default_suggest_options[:client]}"+
-                      "&access=#{@default_suggest_options[:client]}"+
+                      "&access=p"+
                       "&format=rich")
   end
 
@@ -212,7 +212,7 @@ module RailsGSA
                      "&max=#{@default_suggest_options[:max]}"+
                      "&site=#{@default_suggest_options[:site]}"+
                      "&client=#{@default_suggest_options[:client]}"+
-                     "&access=#{@default_suggest_options[:client]}"+
+                     "&access=p"+
                      "&format=os")
   end
 end
